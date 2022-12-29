@@ -32,12 +32,24 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.pre('save', async function(next) {
   if (!this.isModified('tag')) {
-    const counter = await Counter.findOneAndUpdate(
-      { name: 'users' },
-      { $inc: { count: 1 } },
-      { new: true }
-    )
-    this.tag = counter.count
+
+    // find the counter document
+    const counter = await Counter.findOne({ name: 'users' })
+
+    if (!counter) {
+      // create a new counter document
+      const newCounter = new Counter({
+        name: 'users',
+        count: 1,
+      })
+      await newCounter.save()
+      this.tag = `${newCounter.count}`
+    } else {
+      // increment the counter
+      counter.count = counter.count + 1
+      await counter.save()
+      this.tag = `${counter.count}`
+    }
   }
   next()
 })
