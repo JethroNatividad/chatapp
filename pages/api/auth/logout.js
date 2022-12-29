@@ -3,6 +3,7 @@ import User from '../../../models/User'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import fetch from 'isomorphic-unfetch'
+import { deleteCookie, hasCookie, getCookie } from 'cookies-next'
 
 export default async function handler(req, res) {
     const { method } = req
@@ -21,11 +22,15 @@ export default async function handler(req, res) {
 
 async function logout(req, res) {
     try {
+
+        if (!hasCookie('authToken', { req, res })) {
+            return res.status(400).json({ message: 'Already logged out!' })
+        }
         // Extract the jti claim from the auth token
-        const { jti } = jwt.decode(req.cookies.authToken)
+        const { jti } = jwt.decode(getCookie('authToken', { req, res }))
 
         // Invalidate the jti in the blacklist
-        await fetch(`api/auth/blacklist`, {
+        await fetch(`${process.env.HOST}/api/auth/blacklist`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +40,7 @@ async function logout(req, res) {
         })
 
         // Clear the auth token cookie
-        res.clearCookie('authToken')
+        deleteCookie('authToken', { req, res })
 
         res.status(200).json({ message: 'Logout successful' })
     } catch (error) {
