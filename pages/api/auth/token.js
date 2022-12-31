@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import dbConnect from "../../../lib/dbConnect"
 import { generateAccessToken } from "../../../lib/server/jwt"
 import Token from "../../../models/Token"
 
