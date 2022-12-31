@@ -1,3 +1,4 @@
+import dbConnect from "../../../lib/dbConnect"
 import verifyToken from "../../../lib/server/verifyToken"
 import User from "../../../models/User"
 
