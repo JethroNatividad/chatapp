@@ -14,8 +14,8 @@ export default async function handler(req, res) {
             register(req, res)
             break
         default:
-            res.status(200).json({ error: { message: "Method not allowed!" } })
-            break
+            res.setHeader('Allow', ['POST'])
+            return res.status(405).end(`Method ${method} Not Allowed`)
     }
 }
 
@@ -64,6 +64,6 @@ async function register(req, res) {
 
     } catch (error) {
         console.error(error)
-        res.status(200).json({ error: { message: 'Internal server error' } })
+        res.status(500).json({ error: { message: 'Internal server error' } })
     }
 }
