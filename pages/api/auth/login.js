@@ -1,7 +1,8 @@
 import dbConnect from '../../../lib/dbConnect'
 import User from '../../../models/User'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import { generateAccessToken, generateRefreshToken } from '../../../lib/server/jwt'
+import { serialize } from "cookie"
 
 export default async function handler(req, res) {
     const { method } = req
@@ -13,7 +14,7 @@ export default async function handler(req, res) {
             login(req, res)
             break
         default:
-            res.status(400).json({ message: "Method not allowed!" })
+            res.status(200).json({ error: { message: "Method not allowed!" } })
             break
     }
 }
@@ -23,38 +24,40 @@ async function login(req, res) {
         const { email, password } = req.body
         // validate input
         if (!email || !password) {
-            return res.status(400).json({ message: 'Email, and password are required' })
+            return res.status(200).json({ error: { message: 'Email and password are required' } })
         }
 
         const user = await User.findOne({ email })
         // check if user doesn't exist
         if (!user) {
-            return res.status(400).json({ message: 'Email already exists' })
+            return res.status(200).json({ error: { message: 'Invalid credentials' } })
         }
 
         // check if password is correct
         const isPasswordCorrect = await bcrypt.compare(password, user.password)
         if (!isPasswordCorrect) {
-            return res.status(400).json({ message: 'Invalid credentials' })
+            return res.status(200).json({ error: { message: 'Invalid credentials' } })
         }
 
-        // create JWT
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: 86400, // expires in 24 hours
-        })
+        const accessToken = generateAccessToken(user._id)
+        const refreshToken = await generateRefreshToken(user._id)
+
+        // Set the refresh token as a cookie, httpOnly to prevent XSS attacks
+        const serializedRefresh = serialize("refresh_token", refreshToken, { httpOnly: true, sameSite: "strict", path: "/" })
+        res.setHeader("Set-Cookie", serializedRefresh)
 
         res.status(201).json({
-            message: 'Successfully logged in',
+            error: null,
             user: {
                 _id: user._id,
                 email: user.email,
                 username: user.username,
             },
-            token,
+            accessToken,
         })
 
     } catch (error) {
         console.error(error)
-        res.status(500).json({ message: 'Internal server error' })
+        res.status(200).json({ error: { message: 'Internal server error' } })
     }
 }
