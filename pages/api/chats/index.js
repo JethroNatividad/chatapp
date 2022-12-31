@@ -82,4 +82,23 @@ async function createChat(req, res) {
     }
 }
 
-async function getChats(req, res) {}
+async function getChats(req, res) {
+    try {
+        const userId = req.user.id
+        // Search for chats where the user is included in the users array
+        const chats = await Chat.find({ users: userId })
+        res.status(200).json({
+            error: null,
+            chats: chats.map(chat => ({
+                id: chat._id,
+                users: chat.users,
+                last_message: chat.last_message,
+                last_message_at: chat.last_message_at,
+                name: chat.name,
+            }))
+        })
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: { message: 'Internal server error' } })
+    }
+}
