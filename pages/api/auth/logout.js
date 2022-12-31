@@ -8,16 +8,16 @@ export default async function handler(req, res) {
     await dbConnect()
 
     switch (method) {
-        case 'GET':
+        case 'POST':
             return logout(req, res)
         default:
-            res.setHeader('Allow', ['GET'])
+            res.setHeader('Allow', ['POST'])
             return res.status(405).end(`Method ${method} Not Allowed`)
     }
 }
 
 async function logout(req, res) {
-    const refreshToken = req.cookie.refresh_token
+    const refreshToken = req.cookies.refresh_token
     if (!refreshToken) {
         console.log('no refresh token so you are already logged out')
         return res.status(200).end('no refresh token so you are already logged out')
