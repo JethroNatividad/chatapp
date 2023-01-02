@@ -40,6 +40,9 @@ async function getChat(req, res) {
             return res.status(200).json({ error: { message: 'User not in chat' } })
         }
 
+        await chat.populate('users', ['_id', 'username', 'email', 'profile_picture', 'tag'])
+        await chat.populate('messages')
+
         return res.status(200).json({
             error: null,
             chat: {
