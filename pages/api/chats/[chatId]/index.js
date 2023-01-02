@@ -23,7 +23,7 @@ export default async function handler(req, res) {
 async function getChat(req, res) {
     try {
         const userId = req.user.id
-        const chatId = req.query.id
+        const chatId = req.query.chatId
 
         if (!chatId) {
             return res.status(200).json({ error: { message: 'Chat id is required' } })
