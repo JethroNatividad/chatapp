@@ -1,6 +1,7 @@
 import dbConnect from "../../../../lib/dbConnect"
 import verifyToken from "../../../../lib/server/verifyToken"
 import Chat from "../../../../models/Chat"
+import Message from "../../../../models/Message"
 
 export default async function handler(req, res) {
     const { method } = req
@@ -40,13 +41,19 @@ async function getChat(req, res) {
             return res.status(200).json({ error: { message: 'User not in chat' } })
         }
 
-        // Latest message seen
-        // If user has not seen the latest message, add user to seen array
-        const latestMessage = chat.messages[chat.messages.length - 1]
-        if (latestMessage && !latestMessage.seen.includes(userId)) {
-            latestMessage.seen.push(userId)
-            await latestMessage.save()
-        }
+
+        // Update the messages seen by the user
+        // get all the messages that the user has not seen
+        const messages = await Message.find({
+            chat: chatId,
+            seen: { $nin: [userId] }
+        })
+
+        // update the messages seen by the user, foreach
+        messages.forEach(async message => {
+            message.seen.push(userId)
+            await message.save()
+        })
 
         await chat.populate('users', ['_id', 'username', 'email', 'profile_picture', 'tag'])
         await chat.populate('messages')
