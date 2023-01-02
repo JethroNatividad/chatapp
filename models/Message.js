@@ -15,6 +15,12 @@ const MessageSchema = new mongoose.Schema({
   attachments: [{
     type: String,
   }],
+  seen: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ]
 
 },
   {
