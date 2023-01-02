@@ -49,7 +49,9 @@ async function sendMessage(req, res) {
             sender: userId,
             text,
             attachments,
+            seen: [userId]
         })
+
         await message.save()
 
         chat.messages.push(message._id)

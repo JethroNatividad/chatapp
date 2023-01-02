@@ -40,6 +40,14 @@ async function getChat(req, res) {
             return res.status(200).json({ error: { message: 'User not in chat' } })
         }
 
+        // Latest message seen
+        // If user has not seen the latest message, add user to seen array
+        const latestMessage = chat.messages[chat.messages.length - 1]
+        if (latestMessage && !latestMessage.seen.includes(userId)) {
+            latestMessage.seen.push(userId)
+            await latestMessage.save()
+        }
+
         await chat.populate('users', ['_id', 'username', 'email', 'profile_picture', 'tag'])
         await chat.populate('messages')
 
