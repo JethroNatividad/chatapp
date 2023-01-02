@@ -86,7 +86,7 @@ async function getChats(req, res) {
     try {
         const userId = req.user.id
         // Search for chats where the user is included in the users array
-        const chats = await Chat.find({ users: userId })
+        const chats = await Chat.find({ users: userId }).populate('users', ['username', 'tag', 'profile_picture', 'email'])
         res.status(200).json({
             error: null,
             chats: chats.map(chat => ({
