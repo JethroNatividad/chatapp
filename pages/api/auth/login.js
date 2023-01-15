@@ -49,7 +49,7 @@ async function login(req, res) {
         res.status(201).json({
             error: null,
             user: {
-                _id: user._id,
+                id: user._id,
                 email: user.email,
                 username: user.username,
             },
