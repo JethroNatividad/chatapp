@@ -1,8 +1,9 @@
-import { Button, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
+import { Button, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input, Link, Text } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
+import NextLink from 'next/link'
 
 
 const Login = () => {
@@ -76,6 +77,9 @@ const Login = () => {
 
                 ) }
             </Formik>
+            <Text textAlign="center" fontSize='md'>Don't have an account? <Link as={ NextLink } href="/register">Register</Link></Text>
+
+
         </Container>
     )
 }
