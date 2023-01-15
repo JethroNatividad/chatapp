@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
 
     }, [])
 
-    async function login(email, password) {
+    async function login({ email, password }) {
         // handle login logic
         // and set the user state
         try {
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
         }
     }
 
-    async function register(username, email, password) {
+    async function register({ username, email, password }) {
         // handle register logic
         // and set the user state
         try {
