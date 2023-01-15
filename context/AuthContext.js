@@ -1,8 +1,13 @@
 import { cookieStorageManager } from '@chakra-ui/react'
 import axios from 'axios'
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 
-const AuthContext = createContext()
+const AuthContext = createContext({
+    user: null,
+    login: async () => {},
+    logout: async () => {},
+    register: async () => {},
+})
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)

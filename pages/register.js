@@ -1,8 +1,12 @@
-import { Button, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
+import { Alert, Button, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import { useAuth } from '../context/AuthContext'
+
 
 const register = () => {
+    const { register, user } = useAuth()
+
     function validate(values) {
         const errors = {}
 
@@ -38,11 +42,13 @@ const register = () => {
             <Formik
                 initialValues={ { username: '' } }
                 validate={ validate }
-                onSubmit={ (values, actions) => {
-                    setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2))
-                        actions.setSubmitting(false)
-                    }, 1000)
+                onSubmit={ async ({ username, email, password }, { setSubmitting }) => {
+                    setSubmitting(true)
+                    try {
+                        await register({ username, email, password })
+                    } catch (error) {
+                        alert(error)
+                    }
                 } }
             >
                 { ({ errors, touched, isSubmitting }) => (
