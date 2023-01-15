@@ -10,11 +10,25 @@ export function AuthProvider({ children }) {
     useEffect(() => {
         // check for existing user session
         // and set the user state accordingly
+        // get the token from the cookie
+        // call /api/auth/me to get the user
+
     }, [])
 
-    function login(username, password) {
+    async function login(email, password) {
         // handle login logic
         // and set the user state
+        try {
+            const response = await axios.post('/api/auth/login', { email, password })
+            if (response.data.error) {
+                throw new Error(response.data.error.message)
+            }
+            setUser(response.data.user)
+            cookieStorageManager.set('token', response.data.token)
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     async function register(username, email, password) {
@@ -33,9 +47,17 @@ export function AuthProvider({ children }) {
         }
     }
 
-    function logout() {
+    async function logout() {
         // handle logout logic
         // and set the user state to null
+        try {
+            setUser(null)
+            cookieStorageManager.remove('token')
+            await axios.post('/api/auth/logout')
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     return (
