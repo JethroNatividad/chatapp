@@ -1,6 +1,9 @@
 import { cookieStorageManager } from '@chakra-ui/react'
 import axios from 'axios'
 import { createContext, useState, useEffect, useContext } from 'react'
+import fetcher from '../lib/fetcher'
+import { setCookie, deleteCookie } from 'cookies-next'
+
 
 const AuthContext = createContext({
     user: null,
@@ -13,11 +16,18 @@ export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
-        // check for existing user session
-        // and set the user state accordingly
-        // get the token from the cookie
-        // call /api/auth/me to get the user
-
+        const fn = async () => {
+            try {
+                const [error, data] = await fetcher('/api/auth/me')
+                if (error) {
+                    throw new Error(error.message)
+                }
+                setUser(data.user)
+            } catch (error) {
+                alert(error)
+            }
+        }
+        fn()
     }, [])
 
     async function login({ email, password }) {
@@ -29,7 +39,8 @@ export function AuthProvider({ children }) {
                 throw new Error(response.data.error.message)
             }
             setUser(response.data.user)
-            cookieStorageManager.set('token', response.data.token)
+            setCookie('accessToken', response.data.token)
+            // cookieStorageManager.set('token', response.data.token)
 
         } catch (error) {
             throw new Error(error.message)
@@ -45,7 +56,7 @@ export function AuthProvider({ children }) {
                 throw new Error(response.data.error.message)
             }
             setUser(response.data.user)
-            cookieStorageManager.set('token', response.data.token)
+            setCookie('accessToken', response.data.token)
 
         } catch (error) {
             throw new Error(error.message)
@@ -57,7 +68,7 @@ export function AuthProvider({ children }) {
         // and set the user state to null
         try {
             setUser(null)
-            cookieStorageManager.remove('token')
+            deleteCookie('accessToken')
             await axios.post('/api/auth/logout')
 
         } catch (error) {
