@@ -1,11 +1,13 @@
 import { Alert, Button, Container, FormControl, FormErrorMessage, FormLabel, Heading, Input } from '@chakra-ui/react'
 import { Field, Form, Formik } from 'formik'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useAuth } from '../context/AuthContext'
 
 
 const register = () => {
     const { register, user } = useAuth()
+    const { router } = useRouter()
 
     function validate(values) {
         const errors = {}
@@ -33,8 +35,12 @@ const register = () => {
         }
 
         return errors
-
     }
+
+    if (user) {
+        router.push('/')
+    }
+
 
     return (
         <Container maxW="container.sm" px="5">
@@ -46,6 +52,7 @@ const register = () => {
                     setSubmitting(true)
                     try {
                         await register({ username, email, password })
+                        router.push('/')
                     } catch (error) {
                         alert(error)
                     }
