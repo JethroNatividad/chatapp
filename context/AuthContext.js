@@ -9,20 +9,26 @@ const AuthContext = createContext({
     login: async () => {},
     logout: async () => {},
     register: async () => {},
+    userLoading: true,
 })
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
+    const [userLoading, setUserLoading] = useState(true)
+
 
     useEffect(() => {
         const fn = async () => {
             try {
                 const [error, data] = await fetcher('/api/auth/me')
                 if (error) {
+                    setUserLoading(false)
                     throw new Error(error.message)
                 }
+                setUserLoading(false)
                 setUser(data.user)
             } catch (error) {
+                setUserLoading(false)
                 console.log(error)
             }
         }
@@ -76,7 +82,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={ { user, login, logout, register } }>
+        <AuthContext.Provider value={ { user, login, logout, register, userLoading } }>
             { children }
         </AuthContext.Provider>
     )
