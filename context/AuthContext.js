@@ -25,8 +25,8 @@ export function AuthProvider({ children }) {
                     setUserLoading(false)
                     throw new Error(error.message)
                 }
-                setUserLoading(false)
                 setUser(data.user)
+                setUserLoading(false)
             } catch (error) {
                 setUserLoading(false)
                 console.log(error)
