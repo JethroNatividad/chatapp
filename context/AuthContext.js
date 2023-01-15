@@ -1,3 +1,5 @@
+import { cookieStorageManager } from '@chakra-ui/react'
+import axios from 'axios'
 import { createContext, useState, useEffect } from 'react'
 
 const AuthContext = createContext()
@@ -15,9 +17,20 @@ export function AuthProvider({ children }) {
         // and set the user state
     }
 
-    function register(username, email, password) {
+    async function register(username, email, password) {
         // handle register logic
         // and set the user state
+        try {
+            const response = await axios.post('/api/auth/register', { username, email, password })
+            if (response.data.error) {
+                throw new Error(response.data.error.message)
+            }
+            setUser(response.data.user)
+            cookieStorageManager.set('token', response.data.token)
+
+        } catch (error) {
+            throw new Error(error.message)
+        }
     }
 
     function logout() {
