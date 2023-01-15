@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
                 }
                 setUser(data.user)
             } catch (error) {
-                alert(error)
+                console.log(error)
             }
         }
         fn()

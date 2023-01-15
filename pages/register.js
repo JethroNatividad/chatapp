@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext'
 
 const register = () => {
     const { register, user } = useAuth()
-    const { router } = useRouter()
+    const router = useRouter()
 
     function validate(values) {
         const errors = {}
