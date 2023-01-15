@@ -5,7 +5,7 @@ import React from 'react'
 import { useAuth } from '../context/AuthContext'
 
 
-const register = () => {
+const Register = () => {
     const { register, user } = useAuth()
     const router = useRouter()
 
@@ -91,4 +91,4 @@ const register = () => {
     )
 }
 
-export default register
+export default Register
