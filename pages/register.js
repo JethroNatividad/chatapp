@@ -45,45 +45,27 @@ const register = () => {
                     }, 1000)
                 } }
             >
-                { (props) => (
+                { ({ errors, touched, isSubmitting }) => (
                     <Form>
-                        <Field name='username'>
-                            { ({ field, form }) => (
-                                <FormControl mb="3" isInvalid={ form.errors.username && form.touched.username }>
-                                    <FormLabel>Username</FormLabel>
-                                    <Input { ...field } placeholder="Username" />
-                                    <FormErrorMessage>{ form.errors.username }</FormErrorMessage>
-                                </FormControl>
-                            ) }
-
-                        </Field>
-
-                        <Field name='email'>
-                            { ({ field, form }) => (
-                                <FormControl mb="3" isInvalid={ form.errors.email && form.touched.email }>
-                                    <FormLabel>Email</FormLabel>
-                                    <Input { ...field } placeholder="Email" />
-                                    <FormErrorMessage>{ form.errors.email }</FormErrorMessage>
-                                </FormControl>
-                            ) }
-
-                        </Field>
-
-                        <Field name='password'>
-                            { ({ field, form }) => (
-                                <FormControl mb="3" isInvalid={ form.errors.password && form.touched.password }>
-                                    <FormLabel>Password</FormLabel>
-                                    <Input { ...field } placeholder="Password" />
-                                    <FormErrorMessage>{ form.errors.password }</FormErrorMessage>
-                                </FormControl>
-                            ) }
-
-                        </Field>
-
+                        <FormControl mb="3" isInvalid={ !!errors.username && touched.username }>
+                            <FormLabel htmlFor="username">Username</FormLabel>
+                            <Field as={ Input } id="username" name="username" placeholder="Username" />
+                            <FormErrorMessage>{ errors.username }</FormErrorMessage>
+                        </FormControl>
+                        <FormControl mb="3" isInvalid={ !!errors.email && touched.email }>
+                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <Field as={ Input } id="email" name="email" placeholder="Email" />
+                            <FormErrorMessage>{ errors.email }</FormErrorMessage>
+                        </FormControl>
+                        <FormControl mb="3" isInvalid={ !!errors.password && touched.password }>
+                            <FormLabel htmlFor="password">Password</FormLabel>
+                            <Field as={ Input } type="password" id="password" name="password" placeholder="Password" />
+                            <FormErrorMessage>{ errors.password }</FormErrorMessage>
+                        </FormControl>
                         <Button
                             mt={ 4 }
                             colorScheme='teal'
-                            isLoading={ props.isSubmitting }
+                            isLoading={ isSubmitting }
                             type='submit'
                         >
                             Submit
