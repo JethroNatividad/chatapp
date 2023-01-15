@@ -1,4 +1,3 @@
-import { cookieStorageManager } from '@chakra-ui/react'
 import axios from 'axios'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher from '../lib/fetcher'
