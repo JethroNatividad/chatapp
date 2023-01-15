@@ -1,10 +1,12 @@
 import { ChakraProvider } from '@chakra-ui/react'
-
+import { AuthProvider } from '../context/authContext'
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <Component { ...pageProps } />
-    </ChakraProvider>
+    <AuthProvider>
+      <ChakraProvider>
+        <Component { ...pageProps } />
+      </ChakraProvider>
+    </AuthProvider>
   )
 }
 
