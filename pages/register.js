@@ -46,7 +46,7 @@ const Register = () => {
         <Container maxW="container.sm" px="5">
             <Heading textAlign="center" mb="5">Create an account</Heading>
             <Formik
-                initialValues={ { username: '' } }
+                initialValues={ { username: '', email: '', password: '' } }
                 validate={ validate }
                 onSubmit={ async ({ username, email, password }, { setSubmitting }) => {
                     setSubmitting(true)
