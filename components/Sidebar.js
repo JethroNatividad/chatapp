@@ -4,8 +4,8 @@ import Chat from './Chat'
 
 const Sidebar = () => {
     return (
-        <Flex flexDir='column' h='full' w='full' >
-            <Box px='2' py='3' h={ ['14', null, null, '20'] } shadow='sm' bg="blackAlpha.400">
+        <Flex direction='column' h='full' w='full' bg="blackAlpha.300">
+            <Box px='2' py='3' h={ ['14', null, null, '16'] } shadow='md' >
                 <Button size={ ['sm', null, null, 'md'] }>Start a conversation</Button>
             </Box>
             <Box overflowY='scroll'>
@@ -23,7 +23,7 @@ const Sidebar = () => {
                 <Chat />
                 <Chat />
             </Box>
-        </Flex>
+        </Flex >
     )
 }
 

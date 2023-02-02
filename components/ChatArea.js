@@ -1,10 +1,14 @@
 import React from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 
 const ChatArea = () => {
     return (
-        <Box w='full'>ChatArea</Box>
+        <Flex h='full' direction="column" w='full'>
+            <Box px='2' py='3' h={ ['14', null, null, '16'] } shadow='md'>
+                hi
+            </Box>
+        </Flex>
 
     )
 }
