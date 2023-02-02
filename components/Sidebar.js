@@ -1,8 +1,9 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 const Sidebar = () => {
     return (
-        <div>Sidebar</div>
+        <Box w='full'>Sidebar</Box>
     )
 }
 
