@@ -1,0 +1,78 @@
+[
+  {
+    "_id": "c6d906f8-4298-4c90-a194-b857acbe5397",
+    "colId": "c7537461-afa8-48c6-9e2d-5ec1cc238c08",
+    "containerId": "",
+    "name": "login",
+    "url": "http://localhost:3000/api/auth/login",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2023-02-02T15:05:24.466Z",
+    "modified": "2023-02-02T15:05:24.466Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"jethro@gmail.com\",\n  \"password\": \"Password1\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "3b27be64-86e6-4085-87ed-61fc302ac8a6",
+    "colId": "c7537461-afa8-48c6-9e2d-5ec1cc238c08",
+    "containerId": "",
+    "name": "token",
+    "url": "http://localhost:3000/api/auth/token",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-02-02T15:07:14.212Z",
+    "modified": "2023-02-02T15:07:14.212Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "dd37c07e-a6f9-487d-aabf-b63806f2436c",
+    "colId": "f85f8c0f-8223-4f51-9e88-4bce3f8ccbc4",
+    "containerId": "",
+    "name": "get users",
+    "url": "http://localhost:3000/api/users?search=",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-02-02T15:08:56.590Z",
+    "modified": "2023-02-02T15:18:31.838Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "search",
+        "value": "",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDkxODI0Y2FmMWNhNGJkNjViMWFkMiIsImlhdCI6MTY3NTM1MDQwNywiZXhwIjoxNjc1MzU0MDA3fQ.mrvOJIB4tmIoZPLUiHyt7ViC5KtvWMae2UD8F88UeIo"
+    },
+    "tests": []
+  },
+  {
+    "_id": "bd31aece-96f8-4e9b-abb6-29fa9e7951c9",
+    "colId": "c7537461-afa8-48c6-9e2d-5ec1cc238c08",
+    "containerId": "",
+    "name": "signup",
+    "url": "http://localhost:3000/api/auth/register",
+    "method": "POST",
+    "sortNum": 15000,
+    "created": "2023-02-02T15:09:09.741Z",
+    "modified": "2023-02-02T15:10:29.860Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"username\": \"ching\",\n  \"email\": \"ching@gmail.com\",\n  \"password\": \"Password1\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]

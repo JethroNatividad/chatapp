@@ -9,6 +9,7 @@ import {
     ModalCloseButton, Button
 } from '@chakra-ui/react'
 import { useCreateChat } from '../context/CreateChatContext'
+import SearchUsers from './SearchUsers'
 
 
 const CreateChat = () => {
@@ -20,7 +21,7 @@ const CreateChat = () => {
                 <ModalHeader>Create a conversation</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    Lorem, ipsum.
+                    <SearchUsers />
                 </ModalBody>
 
 
