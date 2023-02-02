@@ -25,8 +25,8 @@ export function CreateChatProvider({ children }) {
     }
 
     const toggleSelectUser = (user) => {
-        if (selectedUsers.some(u => u.id === user.id)) {
-            return setSelectedUsers(prev => prev.filter(u => u.id !== user.id))
+        if (selectedUsers.some(u => u._id === user._id)) {
+            return setSelectedUsers(prev => prev.filter(u => u._id !== user._id))
         }
         return setSelectedUsers(prev => [...prev, user])
     }

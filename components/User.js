@@ -2,12 +2,12 @@ import React from 'react'
 import { Avatar, Text, Flex, Box } from '@chakra-ui/react'
 import { useCreateChat } from '../context/CreateChatContext'
 
-const User = ({ username, email, tag, id }) => {
+const User = ({ username, email, tag, _id }) => {
     const { toggleSelectUser, selectedUsers } = useCreateChat()
     const handleClick = () => {
-        toggleSelectUser({ username, tag, id })
+        toggleSelectUser({ username, tag, _id })
     }
-    const isSelected = selectedUsers.some(user => user.id === id)
+    const isSelected = selectedUsers.some(user => user._id === _id)
     return (
         <Flex onClick={ handleClick } px='2' bg={ isSelected && 'blackAlpha.300' } py='1' rounded='md' align='center' cursor='pointer' _hover={ {
             bg: 'blackAlpha.300'

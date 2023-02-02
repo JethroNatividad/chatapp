@@ -65,12 +65,12 @@
     "method": "POST",
     "sortNum": 15000,
     "created": "2023-02-02T15:09:09.741Z",
-    "modified": "2023-02-02T15:10:29.860Z",
+    "modified": "2023-02-02T16:04:19.918Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"username\": \"ching\",\n  \"email\": \"ching@gmail.com\",\n  \"password\": \"Password1\"\n}",
+      "raw": "{\n  \"username\": \"chingad\",\n  \"email\": \"chingadfa@gmail.com\",\n  \"password\": \"Password1\"\n}",
       "form": []
     },
     "tests": []
