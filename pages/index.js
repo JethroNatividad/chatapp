@@ -2,7 +2,7 @@ import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
 import Sidebar from '../components/Sidebar'
 import ChatArea from '../components/ChatArea'
-import { Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 
 const Index = () => {
@@ -17,7 +17,7 @@ const Index = () => {
   if (userLoading) return <div>Loading...</div>
 
   return (
-    <Box display="flex" h='100vh'>
+    <Flex h='100vh'>
       <Box h='full' w={ ['sm'] }>
         <Sidebar />
       </Box>
@@ -26,7 +26,7 @@ const Index = () => {
       </Box>
       {/* <h1>Hello { user.username }</h1>
       <button onClick={ logout }>Logout</button> */}
-    </Box>
+    </Flex>
   )
 }
 
