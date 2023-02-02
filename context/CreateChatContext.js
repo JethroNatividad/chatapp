@@ -1,3 +1,4 @@
+import { useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher from '../lib/fetcher'
@@ -13,16 +14,9 @@ const CreateChatContext = createContext({
 })
 
 export function CreateChatProvider({ children }) {
-    const [isOpen, setIsOpen] = useState(false)
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
     const [selectedUsers, setSelectedUsers] = useState([])
-
-    const onOpen = () => {
-        setIsOpen(true)
-    }
-
-    const onClose = () => {
-        setIsOpen(false)
-    }
 
     const toggleSelectUser = (user) => {
         if (selectedUsers.some(u => u._id === user._id)) {
