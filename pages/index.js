@@ -1,5 +1,7 @@
 import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
+import Sidebar from '../components/Sidebar'
+import ChatArea from '../components/ChatArea'
 
 
 const Index = () => {
@@ -15,6 +17,8 @@ const Index = () => {
 
   return (
     <div>
+      <Sidebar />
+      <ChatArea />
       <h1>Hello { user.username }</h1>
       <button onClick={ logout }>Logout</button>
     </div>
