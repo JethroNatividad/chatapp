@@ -1,17 +1,29 @@
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import React from 'react'
 import Chat from './Chat'
 
 const Sidebar = () => {
     return (
-        <Box h='full' w='full' >
+        <Flex flexDir='column' h='full' w='full' >
             <Box px='2' py='3' shadow='sm' bg="blackAlpha.400">
                 <Button>Start a conversation</Button>
             </Box>
-            <Box>
+            <Box overflowY='scroll'>
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
+                <Chat />
                 <Chat />
             </Box>
-        </Box>
+        </Flex>
     )
 }
 
