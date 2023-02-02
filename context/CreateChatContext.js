@@ -9,8 +9,7 @@ const CreateChatContext = createContext({
     onClose: () => {},
     createChat: async () => {},
     selectedUsers: [],
-    selectUser: () => {},
-    removeSelectedUser: () => {},
+    toggleSelectUser: () => {},
 })
 
 export function CreateChatProvider({ children }) {
@@ -25,12 +24,11 @@ export function CreateChatProvider({ children }) {
         setIsOpen(false)
     }
 
-    const selectUser = (user) => {
-        setSelectedUsers(prev => [...prev, user])
-    }
-
-    const removeSelectedUser = (user) => {
-        setSelectedUsers(prev => prev.filter(u => u.id !== user.id))
+    const toggleSelectUser = (user) => {
+        if (selectedUsers.some(u => u.id === user.id)) {
+            return setSelectedUsers(prev => prev.filter(u => u.id !== user.id))
+        }
+        return setSelectedUsers(prev => [...prev, user])
     }
 
     async function createChat() {
@@ -41,7 +39,7 @@ export function CreateChatProvider({ children }) {
 
 
     return (
-        <CreateChatContext.Provider value={ { isOpen, onOpen, onClose, createChat, selectedUsers, selectUser, removeSelectedUser } }>
+        <CreateChatContext.Provider value={ { isOpen, onOpen, onClose, createChat, selectedUsers, toggleSelectUser } }>
             { children }
         </CreateChatContext.Provider>
     )
