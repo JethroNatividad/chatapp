@@ -8,7 +8,10 @@ const Chat = () => {
         } }>
             <Avatar name='User' />
             <Box flex='1' px='2'>
-                <Text fontSize='xl' >Username</Text>
+                <Flex justifyContent='space-between'>
+                    <Text fontSize='xl' >Username</Text>
+                    <Text fontSize='sm' color='gray.500' ml='auto'>12:00</Text>
+                </Flex>
                 <Text noOfLines={ 1 }>Last meddddddddddddddddddeashas ahsdjasdhahdshasdashdahsdhadh asdhad</Text>
             </Box>
         </Flex>
