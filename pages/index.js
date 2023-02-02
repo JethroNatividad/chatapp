@@ -3,6 +3,8 @@ import { useRouter } from 'next/router'
 import Sidebar from '../components/Sidebar'
 import ChatArea from '../components/ChatArea'
 import { Box, Flex } from '@chakra-ui/react'
+import { useState } from 'react'
+import CreateChat from '../components/CreateChat'
 
 
 const Index = () => {
@@ -17,13 +19,14 @@ const Index = () => {
   if (userLoading) return <div>Loading...</div>
 
   return (
-    <Flex h='100vh'>
+    <Flex h='100vh' pos='relative'>
       <Box h='full' w={ ['sm'] }>
         <Sidebar />
       </Box>
       <Box h='full' flex='1'>
         <ChatArea />
       </Box>
+      <CreateChat />
       {/* <h1>Hello { user.username }</h1>
       <button onClick={ logout }>Logout</button> */}
     </Flex>
