@@ -21,12 +21,6 @@ const Login = () => {
 
         if (!values.password) {
             errors.password = 'Required'
-        } else if (values.password.length < 6) {
-            errors.password = 'Password must be at least 6 characters'
-        } else if (values.password.length > 20) {
-            errors.password = 'Password must be less than 20 characters'
-        } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/.test(values.password)) {
-            errors.password = 'Password must contain at least one uppercase letter, one lowercase letter, and one number'
         }
 
         return errors

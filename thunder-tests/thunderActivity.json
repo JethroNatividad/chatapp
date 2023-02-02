@@ -1,0 +1,100 @@
+[
+  {
+    "_id": "18aa0d53-acce-4d6d-ba4b-129abc6a78b4",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/auth/login",
+    "url": "http://localhost:3000/api/auth/login",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-02-02T15:04:38.158Z",
+    "modified": "2023-02-02T15:04:38.158Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"jethro@gmail.com\",\n  \"password\": \"Password1$\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "fec7845d-6ef8-47b5-abea-9d5d262af052",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/auth/login",
+    "url": "http://localhost:3000/api/auth/login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-02-02T15:04:43.881Z",
+    "modified": "2023-02-02T15:04:50.448Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"email\": \"jethro@gmail.com\",\n  \"password\": \"Password1\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "042b204c-2682-40a6-bc02-1c504c7878f5",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/auth/me",
+    "url": "http://localhost:3000/api/auth/me",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-02-02T15:06:25.315Z",
+    "modified": "2023-02-02T15:06:25.315Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a8e23683-e5da-489b-a928-a17e00c214c5",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/auth/token",
+    "url": "http://localhost:3000/api/auth/token",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-02-02T15:06:32.476Z",
+    "modified": "2023-02-02T15:06:32.476Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "876daf7e-8b88-42ea-9225-7a9df110802f",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/auth/token",
+    "url": "http://localhost:3000/api/auth/token",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-02-02T15:06:47.271Z",
+    "modified": "2023-02-02T15:06:47.271Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "060f0ba1-a7d9-45df-9b5a-f93a1e099eb3",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/users",
+    "url": "http://localhost:3000/api/users",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-02-02T15:08:13.527Z",
+    "modified": "2023-02-02T15:08:13.527Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDkxODI0Y2FmMWNhNGJkNjViMWFkMiIsImlhdCI6MTY3NTM1MDQwNywiZXhwIjoxNjc1MzU0MDA3fQ.mrvOJIB4tmIoZPLUiHyt7ViC5KtvWMae2UD8F88UeIo"
+    },
+    "tests": []
+  }
+]
