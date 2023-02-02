@@ -1,11 +1,15 @@
-import { Box, Input } from '@chakra-ui/react'
+import { Box, Input, Stack, Badge } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { useCreateChat } from '../context/CreateChatContext'
 import fetcher from '../lib/fetcher'
+import User from './User'
 
 const SearchUsers = () => {
     const [searchText, setSearchText] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [timeouts, setTimeouts] = useState()
+    const { selectedUsers } = useCreateChat()
+
 
     useEffect(() => {
         const fn = async () => {
@@ -23,11 +27,23 @@ const SearchUsers = () => {
         }, 500))
     }, [searchText])
 
-
     return (
         <Box>
-            <Input value={ searchText } onChange={ (e) => setSearchText(e.target.value) } />
-            { JSON.stringify(searchResults) }
+            <Input mb='3' value={ searchText } onChange={ (e) => setSearchText(e.target.value) } />
+            { searchResults.map((user) => (
+                <User key={ user.id } { ...user } />
+            )) }
+
+            <Stack direction='row'>
+                { selectedUsers.map(user => (
+                    <Badge key={ user.id }>{ user.username }</Badge>
+                )) }
+                {/* <Badge>Default</Badge>
+                <Badge colorScheme='green'>Success</Badge>
+                <Badge colorScheme='red'>Removed</Badge>
+                <Badge colorScheme='purple'>New</Badge> */}
+            </Stack>
+
         </Box>
     )
 }
