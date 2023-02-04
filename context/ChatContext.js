@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
+import { CreateChatProvider } from './CreateChatContext'
 
 
 const ChatContext = createContext({
@@ -13,7 +14,7 @@ const ChatContext = createContext({
     setActiveChatId: () => {},
 })
 
-export function CreateChatProvider({ children }) {
+export function ChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [activeChat, setActiveChat] = useState(null)
@@ -27,7 +28,9 @@ export function CreateChatProvider({ children }) {
 
     return (
         <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId, toggleSelectUser } }>
-            { children }
+            <CreateChatProvider>
+                { children }
+            </CreateChatProvider>
         </ChatContext.Provider>
     )
 }
