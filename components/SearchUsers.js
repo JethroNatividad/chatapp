@@ -32,20 +32,14 @@ const SearchUsers = () => {
 
     return (
         <Box>
-            <Input mb='3' value={ searchText } onChange={ (e) => setSearchText(e.target.value) } />
-            <Stack mb='3' maxH='52' overflowY='scroll'>
+            <Input placeholder='Search for username or tag' mb='3' value={ searchText } onChange={ (e) => setSearchText(e.target.value) } />
+            <Stack maxH='52' overflowY='scroll'>
                 { searchResults.map((user) => (
                     <User key={ user._id } { ...user } />
                 )) }
             </Stack>
 
-            <Stack direction='row' overflowX='scroll' sx={
-                {
-                    '::-webkit-scrollbar': {
-                        display: 'none'
-                    }
-                }
-            }>
+            <Stack py='2' direction='row' overflowX='auto' >
                 { selectedUsers.map(user => (
                     // <Badge colorScheme='green' key={ user.id }>{ user.username }</Badge>
                     <Flex cursor='pointer' onClick={ () => handleToggle({ username: user.username, tag: user.tag, _id: user._id }) } alignItems='center' px={ 2 } rounded='lg' py={ 1 } _hover={ { bg: 'blue.600' } } bg='blue.700' key={ user.id }>
@@ -64,7 +58,7 @@ const SearchUsers = () => {
                 <Badge colorScheme='purple'>New</Badge> */}
             </Stack>
 
-            <Button disabled={ selectedUsers.length < 1 } mt='3' w='full'>Create Chat</Button>
+            <Button mb='3' disabled={ selectedUsers.length < 1 } mt='3' w='full'>Create Chat</Button>
 
         </Box>
     )
