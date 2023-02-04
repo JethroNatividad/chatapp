@@ -13,7 +13,7 @@ const Sidebar = () => {
             <Box px='2' py='3' h={ ['14', null, null, '16'] } shadow='md' >
                 <Button onClick={ onOpen } size={ ['sm', null, null, 'md'] }>Create a conversation</Button>
             </Box>
-            <Box overflowY='auto'>
+            <Box overflowY='auto' flex={ 1 }>
                 { chatList.map(chat => (
                     <Chat key={ chat.id } last_message={ chat.last_message } username={ chat.name ? chat.name : chat.users.map((user) => user.username).join(", ") } />
                 )) }
