@@ -96,5 +96,23 @@
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDkxODI0Y2FmMWNhNGJkNjViMWFkMiIsImlhdCI6MTY3NTM1MDQwNywiZXhwIjoxNjc1MzU0MDA3fQ.mrvOJIB4tmIoZPLUiHyt7ViC5KtvWMae2UD8F88UeIo"
     },
     "tests": []
+  },
+  {
+    "_id": "163fda61-3990-4342-ba04-aa9a1c1f95d3",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/users",
+    "url": "http://localhost:3000/api/chats",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-02-02T15:08:13.527Z",
+    "modified": "2023-02-04T08:29:22.990Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTQ5OTM1MiwiZXhwIjoxNjc1NTAyOTUyfQ.6Zczpt03X7pzh8xTluvk-abV7abQUtLDdmazHT2_Nes"
+    },
+    "tests": []
   }
 ]

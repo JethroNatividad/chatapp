@@ -13,7 +13,7 @@ import SearchUsers from './SearchUsers'
 
 
 const CreateChat = () => {
-    const { isOpen, onClose, selectedUsers, toggleSelectUser } = useCreateChat()
+    const { isOpen, onClose, selectedUsers, toggleSelectUser, createChat } = useCreateChat()
 
     return (
         <Modal isOpen={ isOpen } onClose={ onClose }>
@@ -38,7 +38,7 @@ const CreateChat = () => {
 
                 </ModalBody>
                 <ModalFooter>
-                    <Button disabled={ selectedUsers.length < 1 } w='full'>Create Chat</Button>
+                    <Button onClick={ createChat } disabled={ selectedUsers.length < 1 } w='full'>Create Chat</Button>
 
                 </ModalFooter>
 

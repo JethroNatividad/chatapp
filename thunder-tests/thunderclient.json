@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 10000,
     "created": "2023-02-02T15:05:24.466Z",
-    "modified": "2023-02-02T15:05:24.466Z",
+    "modified": "2023-02-04T08:29:12.474Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"email\": \"jethro@gmail.com\",\n  \"password\": \"Password1\"\n}",
+      "raw": "{\n  \"email\": \"jett@gmail.com\",\n  \"password\": \"Password1\"\n}",
       "form": []
     },
     "tests": []
@@ -41,7 +41,7 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-02-02T15:08:56.590Z",
-    "modified": "2023-02-02T15:18:31.838Z",
+    "modified": "2023-02-04T08:32:20.538Z",
     "headers": [],
     "params": [
       {
@@ -52,7 +52,7 @@
     ],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDkxODI0Y2FmMWNhNGJkNjViMWFkMiIsImlhdCI6MTY3NTM1MDQwNywiZXhwIjoxNjc1MzU0MDA3fQ.mrvOJIB4tmIoZPLUiHyt7ViC5KtvWMae2UD8F88UeIo"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTQ5OTM1MiwiZXhwIjoxNjc1NTAyOTUyfQ.6Zczpt03X7pzh8xTluvk-abV7abQUtLDdmazHT2_Nes"
     },
     "tests": []
   },
@@ -72,6 +72,47 @@
       "type": "json",
       "raw": "{\n  \"username\": \"chingad\",\n  \"email\": \"chingadfa@gmail.com\",\n  \"password\": \"Password1\"\n}",
       "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "75443346-8ef7-4b67-93ff-3db8dab6b8bd",
+    "colId": "7547c9ee-11b2-4fa0-a31d-a113fb1a3b81",
+    "containerId": "",
+    "name": "Get all chats",
+    "url": "http://localhost:3000/api/chats",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2023-02-04T08:29:45.611Z",
+    "modified": "2023-02-04T08:29:45.611Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTQ5OTM1MiwiZXhwIjoxNjc1NTAyOTUyfQ.6Zczpt03X7pzh8xTluvk-abV7abQUtLDdmazHT2_Nes"
+    },
+    "tests": []
+  },
+  {
+    "_id": "63199627-ced5-44be-aada-4819bda02087",
+    "colId": "7547c9ee-11b2-4fa0-a31d-a113fb1a3b81",
+    "containerId": "",
+    "name": "Create a chat",
+    "url": "http://localhost:3000/api/chats",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-02-04T08:29:52.389Z",
+    "modified": "2023-02-04T08:32:37.830Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"users\": [\"63adcc96af67fd3f2952a3df\"]\n}",
+      "form": []
+    },
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTQ5OTM1MiwiZXhwIjoxNjc1NTAyOTUyfQ.6Zczpt03X7pzh8xTluvk-abV7abQUtLDdmazHT2_Nes"
     },
     "tests": []
   }

@@ -12,5 +12,12 @@
     "created": "2023-02-02T15:08:56.557Z",
     "sortNum": 20000,
     "folders": []
+  },
+  {
+    "_id": "7547c9ee-11b2-4fa0-a31d-a113fb1a3b81",
+    "colName": "Chats",
+    "created": "2023-02-04T08:29:45.606Z",
+    "sortNum": 30000,
+    "folders": []
   }
 ]
