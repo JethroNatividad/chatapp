@@ -2,6 +2,7 @@ import { useDisclosure } from '@chakra-ui/react'
 import axios from 'axios'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
+import { useChat } from './ChatContext'
 
 
 const CreateChatContext = createContext({
@@ -15,6 +16,7 @@ const CreateChatContext = createContext({
 
 export function CreateChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const { setActiveChatId } = useChat()
 
     const [selectedUsers, setSelectedUsers] = useState([])
 
@@ -28,6 +30,7 @@ export function CreateChatProvider({ children }) {
     async function createChat() {
         const [error, data] = await poster('/api/chats', { users: selectedUsers.map(u => u._id) })
         if (error) return console.log(error)
+        setActiveChatId(data.chat.id)
         console.log(data)
     }
 

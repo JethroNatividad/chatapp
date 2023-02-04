@@ -5,7 +5,6 @@ import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
 import { CreateChatProvider } from './CreateChatContext'
 
-
 const ChatContext = createContext({
     isOpen: false,
     onOpen: () => {},
@@ -22,6 +21,7 @@ export function ChatProvider({ children }) {
     const setActiveChatId = async (chatId) => {
         const [error, data] = await fetcher(`/api/chats/${chatId}`)
         if (error) return console.log(error)
+        console.log(data)
         setActiveChat(data.chat)
     }
 
@@ -35,6 +35,6 @@ export function ChatProvider({ children }) {
     )
 }
 
-export function useCreateChat() {
+export function useChat() {
     return useContext(ChatContext)
 }
