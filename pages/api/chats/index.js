@@ -91,7 +91,7 @@ async function getChats(req, res) {
             error: null,
             chats: chats.map(chat => ({
                 id: chat._id,
-                users: chat.users,
+                users: chat.users.filter(user => user._id.toString() !== userId),
                 last_message: chat.last_message,
                 last_message_at: chat.last_message_at,
                 name: chat.name,
