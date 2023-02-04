@@ -95,6 +95,7 @@ async function getChats(req, res) {
                 last_message: chat.last_message,
                 last_message_at: chat.last_message_at,
                 name: chat.name,
+                is_group_chat: chat.is_group_chat,
             }))
         })
     } catch (error) {
