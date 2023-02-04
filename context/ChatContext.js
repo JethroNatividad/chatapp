@@ -27,7 +27,7 @@ export function ChatProvider({ children }) {
 
 
     return (
-        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId, toggleSelectUser } }>
+        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId } }>
             <CreateChatProvider>
                 { children }
             </CreateChatProvider>

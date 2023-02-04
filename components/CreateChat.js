@@ -25,11 +25,11 @@ const CreateChat = () => {
                     <SearchUsers />
                     <Stack py='2' direction='row' overflowX='auto' >
                         { selectedUsers.map(user => (
-                            <Flex cursor='pointer' onClick={ () => toggleSelectUser({ username: user.username, tag: user.tag, _id: user._id }) } alignItems='center' px={ 2 } rounded='lg' py={ 1 } _hover={ { bg: 'blue.600' } } bg='blue.700' key={ user.id }>
+                            <Flex cursor='pointer' onClick={ () => toggleSelectUser({ username: user.username, tag: user.tag, _id: user._id }) } alignItems='center' px={ 2 } rounded='lg' py={ 1 } _hover={ { bg: 'blue.600' } } bg='blue.700' key={ user._id }>
                                 <Text>{ user.username }#{ user.tag }</Text>
                                 <Box w={ 4 } h={ 4 }>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </Box>
                             </Flex>
