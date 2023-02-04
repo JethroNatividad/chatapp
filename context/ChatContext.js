@@ -11,12 +11,23 @@ const ChatContext = createContext({
     onClose: () => {},
     activeChat: null,
     setActiveChatId: () => {},
+    chatList: [],
 })
 
 export function ChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [activeChat, setActiveChat] = useState(null)
+    const [chatList, setChatList] = useState([])
+
+    useEffect(() => {
+        const fn = async () => {
+            const [error, data] = await fetcher('/api/chats')
+            if (error) return console.log(error)
+            setChatList(data.chats)
+        }
+        fn()
+    }, [])
 
     const setActiveChatId = async (chatId) => {
         const [error, data] = await fetcher(`/api/chats/${chatId}`)
@@ -26,8 +37,9 @@ export function ChatProvider({ children }) {
     }
 
 
+
     return (
-        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId } }>
+        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId, chatList } }>
             <CreateChatProvider>
                 { children }
             </CreateChatProvider>
