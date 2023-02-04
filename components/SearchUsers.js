@@ -8,10 +8,6 @@ const SearchUsers = () => {
     const [searchText, setSearchText] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const [timeouts, setTimeouts] = useState()
-    const { selectedUsers, toggleSelectUser } = useCreateChat()
-    const handleToggle = ({ username, tag, _id }) => {
-        toggleSelectUser({ username, tag, _id })
-    }
 
 
     useEffect(() => {
@@ -38,27 +34,6 @@ const SearchUsers = () => {
                     <User key={ user._id } { ...user } />
                 )) }
             </Stack>
-
-            <Stack py='2' direction='row' overflowX='auto' >
-                { selectedUsers.map(user => (
-                    // <Badge colorScheme='green' key={ user.id }>{ user.username }</Badge>
-                    <Flex cursor='pointer' onClick={ () => handleToggle({ username: user.username, tag: user.tag, _id: user._id }) } alignItems='center' px={ 2 } rounded='lg' py={ 1 } _hover={ { bg: 'blue.600' } } bg='blue.700' key={ user.id }>
-                        <Text>{ user.username }#{ user.tag }</Text>
-                        <Box w={ 4 } h={ 4 }>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </Box>
-
-                    </Flex>
-                )) }
-                {/* <Badge>Default</Badge>
-                <Badge colorScheme='green'>Success</Badge>
-                <Badge colorScheme='red'>Removed</Badge>
-                <Badge colorScheme='purple'>New</Badge> */}
-            </Stack>
-
-            <Button mb='3' disabled={ selectedUsers.length < 1 } mt='3' w='full'>Create Chat</Button>
 
         </Box>
     )
