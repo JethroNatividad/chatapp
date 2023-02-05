@@ -1,9 +1,9 @@
 import React from 'react'
 import { Avatar, Text, Flex, Box } from '@chakra-ui/react'
 
-const Chat = ({ username, last_message, last_message_at }) => {
+const Chat = ({ username, last_message, last_message_at, handleClick }) => {
     return (
-        <Flex px='3' py='2' align='center' cursor='pointer' _hover={ {
+        <Flex onClick={ handleClick } px='3' py='2' align='center' cursor='pointer' _hover={ {
             bg: 'blackAlpha.400'
         } }>
             <Avatar name={ username } />

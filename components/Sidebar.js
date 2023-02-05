@@ -6,7 +6,7 @@ import Chat from './Chat'
 
 const Sidebar = () => {
     const { onOpen } = useCreateChat()
-    const { chatList } = useChat()
+    const { chatList, setActiveChatId } = useChat()
 
     return (
         <Flex direction='column' h='full' w='full' bg="blackAlpha.300">
@@ -15,7 +15,7 @@ const Sidebar = () => {
             </Box>
             <Box overflowY='auto' flex={ 1 }>
                 { chatList.map(chat => (
-                    <Chat key={ chat.id } last_message={ chat.last_message } username={ chat.name ? chat.name : chat.users.map((user) => user.username).join(", ") } />
+                    <Chat handleClick={ () => setActiveChatId(chat.id) } key={ chat.id } last_message={ chat.last_message } username={ chat.name ? chat.name : chat.users.map((user) => user.username).join(", ") } />
                 )) }
             </Box>
         </Flex >
