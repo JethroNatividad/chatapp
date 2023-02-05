@@ -62,7 +62,7 @@ async function getChat(req, res) {
             error: null,
             chat: {
                 id: chat._id,
-                users: chat.users,
+                users: chat.users.filter(user => user._id.toString() !== userId),
                 messages: chat.messages,
             },
             message: 'Chat found'
