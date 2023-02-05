@@ -15,7 +15,7 @@ const ChatArea = () => {
     return (
         <Flex h='full' direction="column" w='full'>
             <Box px='5' py='3' h={ ['14', null, null, '16'] } shadow='md'>
-                <Text fontSize='2xl'>Username</Text>
+                <Text fontSize='2xl'>{ activeChat.name ? activeChat.name : activeChat.users.map((user) => user.username).join(", ") }</Text>
             </Box>
         </Flex>
 
