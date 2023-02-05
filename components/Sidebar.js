@@ -2,11 +2,14 @@ import { Box, Button, Flex, Menu, MenuItem, IconButton, MenuList, MenuButton } f
 import React from 'react'
 import { useChat } from '../context/ChatContext'
 import { useCreateChat } from '../context/CreateChatContext'
+import { useAuth } from '../context/AuthContext'
+
 import Chat from './Chat'
 
 const Sidebar = () => {
     const { onOpen } = useCreateChat()
     const { chatList, setActiveChatId } = useChat()
+    const { logout } = useAuth()
 
     return (
         <Flex direction='column' h='full' w='full' bg="blackAlpha.300">
@@ -25,17 +28,8 @@ const Sidebar = () => {
 
                     />
                     <MenuList>
-                        <MenuItem>
-                            New Tab
-                        </MenuItem>
-                        <MenuItem>
-                            New Window
-                        </MenuItem>
-                        <MenuItem>
-                            Open Closed Tab
-                        </MenuItem>
-                        <MenuItem>
-                            Open File...
+                        <MenuItem onClick={ logout }>
+                            Sign out
                         </MenuItem>
                     </MenuList>
                 </Menu>
