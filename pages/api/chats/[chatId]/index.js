@@ -56,7 +56,9 @@ async function getChat(req, res) {
         })
 
         await chat.populate('users', ['_id', 'username', 'email', 'profile_picture', 'tag'])
-        await chat.populate('messages')
+        await chat.populate('messages', ['_id', 'sender', 'text', 'seen', 'createdAt'])
+        await chat.populate('messages.sender', ['_id', 'username', 'profile_picture', 'tag'])
+        await chat.populate('messages.seen', ['_id', 'username', 'profile_picture', 'tag'])
 
         return res.status(200).json({
             error: null,
