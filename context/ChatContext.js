@@ -12,7 +12,7 @@ const ChatContext = createContext({
     activeChat: null,
     setActiveChatId: () => {},
     chatList: [],
-    sendMessage: () => {}
+    sendMessage: async () => {}
 })
 
 export function ChatProvider({ children }) {
@@ -38,10 +38,11 @@ export function ChatProvider({ children }) {
     }
 
     const sendMessage = async (text) => {
+        console.log(text)
         if (!activeChat) return console.log("No active chat")
-        const [error, data] = await poster(`/api/chats/${activeChat}/messages`, { text, attachments: [] })
+        const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
         if (error) return console.log(error)
-        return data
+        console.log(data)
     }
 
     return (
