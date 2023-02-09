@@ -11,6 +11,8 @@ const Sidebar = () => {
     const { chatList, setActiveChatId } = useChat()
     const { logout } = useAuth()
 
+    console.log(chatList)
+
     return (
         <Flex direction='column' h='full' w='full' bg="blackAlpha.300">
             <Flex px='2' py='3' h={ ['14', null, null, '16'] } shadow='md' justifyContent='space-between'>
