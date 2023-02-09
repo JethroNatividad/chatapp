@@ -57,6 +57,7 @@ async function sendMessage(req, res) {
         console.log(text)
 
         chat.messages.push(message._id)
+        chat.last_message = message._id
         await chat.save()
 
         return res.status(200).json({
