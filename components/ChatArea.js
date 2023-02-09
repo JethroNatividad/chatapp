@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Flex, Text } from '@chakra-ui/react'
 import { useChat } from '../context/ChatContext'
 import ChatInput from './ChatInput'
+import Message from './Message'
 
 
 const ChatArea = () => {
@@ -19,7 +20,9 @@ const ChatArea = () => {
                 <Text fontSize='2xl'>{ activeChat.name ? activeChat.name : activeChat.users.map((user) => user.username).join(", ") }</Text>
             </Box>
             <Box flex={ 1 }>
-                Chats
+                { activeChat.messages.map((message) => (
+                    <Message key={ message._id } username={ message.sender.username } text={ message.text } createdAt={ message.createdAt } />
+                )) }
             </Box>
             <Box px="5" py="3">
                 <ChatInput />
