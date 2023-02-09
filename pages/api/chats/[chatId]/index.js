@@ -78,5 +78,17 @@ async function getChat(req, res) {
 }
 
 async function deleteChat(req, res) {
+    try {
+        const chatId = req.query.chatId
 
+        if (!chatId) {
+            return res.status(200).json({ error: { message: 'Chat id is required' } })
+        }
+
+        // delete all the 
+
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: { message: 'Internal server error' } })
+    }
 }

@@ -84,12 +84,12 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-02-04T08:29:45.611Z",
-    "modified": "2023-02-09T11:16:38.850Z",
+    "modified": "2023-02-09T12:26:15.431Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0MTM4OCwiZXhwIjoxNjc1OTQ0OTg4fQ.yxTuLCaMu91WVZonZfT_TJvRw9LEucV63QWxwKqXkFc"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0NTU1OCwiZXhwIjoxNjc1OTQ5MTU4fQ.BE_8Ft-FqO8AiepDn7nCYAtU04HLeZe1dHVNrBQBoeE"
     },
     "tests": []
   },
@@ -125,12 +125,12 @@
     "method": "GET",
     "sortNum": 15000,
     "created": "2023-02-09T11:15:27.967Z",
-    "modified": "2023-02-09T11:20:27.512Z",
+    "modified": "2023-02-09T12:26:05.356Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0MTM4OCwiZXhwIjoxNjc1OTQ0OTg4fQ.yxTuLCaMu91WVZonZfT_TJvRw9LEucV63QWxwKqXkFc"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0NTU1OCwiZXhwIjoxNjc1OTQ5MTU4fQ.BE_8Ft-FqO8AiepDn7nCYAtU04HLeZe1dHVNrBQBoeE"
     },
     "tests": []
   }
