@@ -84,12 +84,12 @@
     "method": "GET",
     "sortNum": 10000,
     "created": "2023-02-04T08:29:45.611Z",
-    "modified": "2023-02-04T09:49:31.852Z",
+    "modified": "2023-02-09T11:16:38.850Z",
     "headers": [],
     "params": [],
     "auth": {
       "type": "bearer",
-      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTUwNDE2MCwiZXhwIjoxNjc1NTA3NzYwfQ.GGdbGGSgeni_rEuHjUEu8GqYqpPjG3NOOB3NtjefJKc"
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0MTM4OCwiZXhwIjoxNjc1OTQ0OTg4fQ.yxTuLCaMu91WVZonZfT_TJvRw9LEucV63QWxwKqXkFc"
     },
     "tests": []
   },
@@ -113,6 +113,24 @@
     "auth": {
       "type": "bearer",
       "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTQ5OTM1MiwiZXhwIjoxNjc1NTAyOTUyfQ.6Zczpt03X7pzh8xTluvk-abV7abQUtLDdmazHT2_Nes"
+    },
+    "tests": []
+  },
+  {
+    "_id": "62d9bb67-cabb-4a92-8ede-12303332b2be",
+    "colId": "7547c9ee-11b2-4fa0-a31d-a113fb1a3b81",
+    "containerId": "",
+    "name": "Get messages from chat",
+    "url": "http://localhost:3000/api/chats/63e4d434ad1253189ebd09e7",
+    "method": "GET",
+    "sortNum": 15000,
+    "created": "2023-02-09T11:15:27.967Z",
+    "modified": "2023-02-09T11:20:27.512Z",
+    "headers": [],
+    "params": [],
+    "auth": {
+      "type": "bearer",
+      "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGRmYzNhMTdjMzg5NDA3ODA1MDZmZiIsImlhdCI6MTY3NTk0MTM4OCwiZXhwIjoxNjc1OTQ0OTg4fQ.yxTuLCaMu91WVZonZfT_TJvRw9LEucV63QWxwKqXkFc"
     },
     "tests": []
   }
