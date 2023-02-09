@@ -52,24 +52,28 @@ async function sendMessage(req, res) {
             seen: [userId]
         })
 
+
         await message.save()
+        console.log(text)
 
         chat.messages.push(message._id)
         await chat.save()
 
         return res.status(200).json({
             error: null,
-            message: 'Message sent'
+            message: 'Message sent',
+            data: message
         })
 
     } catch (error) {
         console.error(error)
-        res.status(500).json({ error: { message: 'Internal server error' } })
+        res.status(500).json({ error: { message: error } })
     }
 }
 
 async function getMessages(req, res) {
     try {
+
 
     } catch (error) {
         console.error(error)
