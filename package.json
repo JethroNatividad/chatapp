@@ -21,6 +21,8 @@
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "socket.io": "^4.6.0",
+    "socket.io-client": "^4.6.0",
     "swr": "^1.0.1"
   }
 }
