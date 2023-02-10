@@ -10,9 +10,9 @@ const Chat = ({ username, last_message, handleClick }) => {
             <Box flex='1' px='2'>
                 <Flex justifyContent='space-between'>
                     <Text fontSize='xl' >{ username }</Text>
-                    <Text fontSize='sm' color='gray.500' ml='auto'>{ last_message.createdAt }</Text>
+                    <Text fontSize='sm' color='gray.500' ml='auto'>{ last_message?.createdAt }</Text>
                 </Flex>
-                <Text noOfLines={ 1 }>{ last_message.text }</Text>
+                <Text noOfLines={ 1 }>{ last_message?.text }</Text>
             </Box>
         </Flex>
     )
