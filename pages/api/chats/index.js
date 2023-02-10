@@ -1,6 +1,7 @@
 import dbConnect from '../../../lib/dbConnect'
 import User from '../../../models/User'
 import Chat from '../../../models/Chat'
+import Message from '../../../models/Message'
 import verifyToken from '../../../lib/server/verifyToken'
 
 export default async function handler(req, res) {
