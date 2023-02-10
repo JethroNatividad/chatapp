@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
 import { CreateChatProvider } from './CreateChatContext'
+import io from 'Socket.IO-client'
 
 const ChatContext = createContext({
     isOpen: false,
@@ -15,11 +16,14 @@ const ChatContext = createContext({
     sendMessage: async () => {}
 })
 
+let socket
+
 export function ChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     const [activeChat, setActiveChat] = useState(null)
     const [chatList, setChatList] = useState([])
+
 
     useEffect(() => {
         const fn = async () => {
@@ -27,7 +31,20 @@ export function ChatProvider({ children }) {
             if (error) return console.log(error)
             setChatList(data.chats)
         }
+        const socketInitializer = async () => {
+            await fetch('/api/socket')
+            socket = io()
+
+            socket.on('connect', () => {
+                console.log('connected')
+            })
+
+            socket.on('new-message', () => {
+                console.log('New message')
+            })
+        }
         fn()
+        socketInitializer()
     }, [])
 
     const setActiveChatId = async (chatId) => {
