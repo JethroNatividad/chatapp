@@ -33,6 +33,11 @@ const SocketHandler = async (req, res) => {
 
                     console.log('users', users)
 
+                    // This works
+                    connections.forEach((value, key) => {
+                        value.emit('receive-message', JSON.stringify(message))
+                    })
+
 
                     // emit the message to all users in the chat
                     users.forEach(user => {
