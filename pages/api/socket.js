@@ -22,6 +22,7 @@ const SocketHandler = async (req, res) => {
 
                 socket.on('authenticate', userId => {
                     userIdToSocketId.set(userId, socket.id)
+                    console.log(`User authenticated: ${userId}`)
                 })
 
                 socket.on('send-message', async data => {
