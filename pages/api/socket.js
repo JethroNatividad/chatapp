@@ -15,22 +15,32 @@ const SocketHandler = async (req, res) => {
             // const connections = new Map()
             // const userIdToSocketId = new Map()
 
-            io.on('connection', socket => {
+            io.on('connection', async socket => {
+                const chatIds = JSON.parse(socket.handshake.query.chatIds)
+                chatIds.forEach(chatId => {
+                    socket.join(chatId)
+                })
+
                 console.log(`User connected: ${socket.id}`)
+                console.log("q", socket.handshake.query.chatIds)
+                console.log("Chat joined: ", JSON.parse(socket.handshake.query.chatIds))
                 // connections.set(socket.id, socket)
 
-                socket.on('authenticate', payload => {
-                    const { userId, chatListIds } = JSON.parse(payload)
-                    chatListIds.forEach(chatId => {
-                        socket.join(chatId)
-                    })
-                    console.log(`User authenticated: ${userId}`)
+                socket.on('initialize', payload => {
+                    const { chatIds } = JSON.parse(payload)
+                    console.log(chatIds)
 
-                    socket.authenticated = true
+                    // chatIds.forEach(chatId => {
+                    //     socket.join(chatId)
+                    // })
+                    // console.log(`User authenticated: ${userId}`)
+
+                    // socket.authenticated = true
                 })
 
                 socket.on('send-message', payload => {
                     const { chatId, message } = JSON.parse(payload)
+                    console.log("SEND MESSAGE", chatId, message)
 
                     // emit the message to all users in the chat
                     io.to(chatId).emit('receive-message', JSON.stringify(message))
