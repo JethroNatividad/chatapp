@@ -23,35 +23,26 @@ const SocketHandler = async (req, res) => {
                 socket.on('authenticate', userId => {
                     userIdToSocketId.set(userId, socket.id)
                     console.log(`User authenticated: ${userId}`)
+                    socket.authenticated = true
                 })
 
-                socket.on('send-message', async data => {
-                    const { chatId, text } = JSON.parse(data)
-                    console.log(chatId, text)
-                    const chat = await Chat.findById(chatId)
-                    if (!chat) return console.log('Chat not found')
-
+                socket.on('send-message', data => {
+                    const { userIds, message } = JSON.parse(data)
                     // get all users in chat that are in the userIdToSocketId map
-                    const users = chat.users.filter(user => userIdToSocketId.has(user.toString()))
-                    // save the message to the database
-                    const sender = userIdToSocketId.get(socket.id)
-                    const message = await Message.create({
-                        chat: chatId,
-                        sender,
-                        text,
-                        seen: [sender]
-                    })
+                    const users = userIds.filter(user => userIdToSocketId.has(user.toString()))
 
-                    await chat.populate('messages', ['_id', 'sender', 'text', 'seen', 'createdAt'])
-                    await chat.populate('messages.sender', ['_id', 'username', 'profile_picture', 'tag'])
-                    await chat.populate('messages.seen', ['_id', 'username', 'profile_picture', 'tag'])
+                    console.log('users', users)
+
+
                     // emit the message to all users in the chat
                     users.forEach(user => {
-                        const socketId = userIdToSocketId.get(user.toString())
+                        const socketId = userIdToSocketId.get(user)
                         if (socketId) {
-                            const socket = connections.get(socketId)
-                            if (socket) {
-                                socket.emit('receive-message', message)
+                            const userSocket = connections.get(socketId)
+                            // io.to(socketId).emit('receive-message', JSON.stringify(message))
+                            if (userSocket && userSocket.authenticated) {
+                                console.log('emitting message to', user, socketId)
+                                userSocket.emit('receive-message', JSON.stringify(message))
                             }
                         }
                     })

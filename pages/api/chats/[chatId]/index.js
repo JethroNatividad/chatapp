@@ -55,6 +55,8 @@ async function getChat(req, res) {
             await message.save()
         })
 
+        const chatUserIds = chat.users.map(user => user.toString())
+
         await chat.populate('users', ['_id', 'username', 'email', 'profile_picture', 'tag'])
         await chat.populate('messages', ['_id', 'sender', 'text', 'seen', 'createdAt'])
         await chat.populate('messages.sender', ['_id', 'username', 'profile_picture', 'tag'])
@@ -65,6 +67,7 @@ async function getChat(req, res) {
             chat: {
                 id: chat._id,
                 users: chat.users.filter(user => user._id.toString() !== userId),
+                userIds: chatUserIds,
                 messages: chat.messages,
             },
             message: 'Chat found'
