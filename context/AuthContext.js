@@ -2,7 +2,7 @@ import axios from 'axios'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher from '../lib/fetcher'
 import { setCookie, deleteCookie } from 'cookies-next'
-
+import io from 'Socket.IO-client'
 
 const AuthContext = createContext({
     user: null,
@@ -12,12 +12,14 @@ const AuthContext = createContext({
     userLoading: true,
 })
 
+let socket
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null)
     const [userLoading, setUserLoading] = useState(true)
 
 
     useEffect(() => {
+
         const fn = async () => {
             try {
                 const [error, data] = await fetcher('/api/auth/me')
@@ -25,6 +27,12 @@ export function AuthProvider({ children }) {
                     setUserLoading(false)
                     throw new Error(error.message)
                 }
+                await fetch('/api/socket')
+                socket = io()
+                socket.on('connect', () => {
+                    console.log('connected')
+                })
+                socket.emit('authenticate', data.user.id)
                 setUser(data.user)
                 setUserLoading(false)
             } catch (error) {
