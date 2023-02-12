@@ -57,9 +57,10 @@ export function ChatProvider({ children }) {
     const sendMessage = async (text) => {
         console.log(text)
         if (!activeChat) return console.log("No active chat")
-        const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
-        if (error) return console.log(error)
-        console.log(data)
+        socket.emit('send-message', JSON.stringify({ chatId: activeChat.id, text }))
+        // const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
+        // if (error) return console.log(error)
+        // console.log(data)
     }
 
     return (

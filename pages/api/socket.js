@@ -27,6 +27,7 @@ const SocketHandler = async (req, res) => {
 
                 socket.on('send-message', async data => {
                     const { chatId, text } = JSON.parse(data)
+                    console.log(chatId, text)
                     const chat = await Chat.findById(chatId)
                     if (!chat) return console.log('Chat not found')
 
