@@ -29,10 +29,13 @@ export function ChatProvider({ children }) {
             const [error, data] = await fetcher('/api/chats')
             if (error) return console.log(error)
             setChatList(data.chats)
-        }
-        const socketInitializer = async () => {
-            await fetch('/api/socket')
-            socket = io()
+
+            await fetcher('/api/socket')
+            socket = io({
+                query: {
+                    chatIds: JSON.stringify(data.chats.map(chat => chat.id))
+                }
+            })
 
             socket.on('connect', () => {
                 console.log('connected')
@@ -47,7 +50,6 @@ export function ChatProvider({ children }) {
             })
         }
         fn()
-        socketInitializer()
     }, [])
 
     const setActiveChatId = async (chatId) => {
@@ -63,7 +65,7 @@ export function ChatProvider({ children }) {
         const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
         if (error) return console.log(error)
         console.log(data)
-        socket.emit('send-message', JSON.stringify({ userIds: activeChat.userIds, message: data }))
+        socket.emit('send-message', JSON.stringify({ chatId: activeChat.id, message: data }))
     }
 
     return (
