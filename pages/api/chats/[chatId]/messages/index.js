@@ -44,6 +44,7 @@ async function sendMessage(req, res) {
             return res.status(200).json({ error: { message: 'User not in chat' } })
         }
 
+
         const message = new Message({
             chat: chatId,
             sender: userId,
@@ -54,6 +55,10 @@ async function sendMessage(req, res) {
 
 
         await message.save()
+
+        await message.populate('sender', ['_id', 'username', 'profile_picture', 'tag'])
+        await message.populate('seen', ['_id', 'username', 'profile_picture', 'tag'])
+
         console.log(text)
 
         chat.messages.push(message._id)
