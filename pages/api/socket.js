@@ -9,53 +9,35 @@ const SocketHandler = async (req, res) => {
     } else {
         try {
             console.log('Socket is initializing')
-            await dbConnect()
             const io = new Server(res.socket.server)
             res.socket.server.io = io
 
-            const connections = new Map()
-            const userIdToSocketId = new Map()
+            // const connections = new Map()
+            // const userIdToSocketId = new Map()
 
             io.on('connection', socket => {
                 console.log(`User connected: ${socket.id}`)
-                connections.set(socket.id, socket)
+                // connections.set(socket.id, socket)
 
-                socket.on('authenticate', userId => {
-                    userIdToSocketId.set(userId, socket.id)
+                socket.on('authenticate', payload => {
+                    const { userId, chatListIds } = JSON.parse(payload)
+                    chatListIds.forEach(chatId => {
+                        socket.join(chatId)
+                    })
                     console.log(`User authenticated: ${userId}`)
+
                     socket.authenticated = true
                 })
 
-                socket.on('send-message', data => {
-                    const { userIds, message } = JSON.parse(data)
-                    // get all users in chat that are in the userIdToSocketId map
-                    const users = userIds.filter(user => userIdToSocketId.has(user.toString()))
-
-                    console.log('users', users)
-
-                    // This works
-                    connections.forEach((value, key) => {
-                        value.emit('receive-message', JSON.stringify(message))
-                    })
-
+                socket.on('send-message', payload => {
+                    const { chatId, message } = JSON.parse(payload)
 
                     // emit the message to all users in the chat
-                    users.forEach(user => {
-                        const socketId = userIdToSocketId.get(user)
-                        if (socketId) {
-                            const userSocket = connections.get(socketId)
-                            // io.to(socketId).emit('receive-message', JSON.stringify(message))
-                            if (userSocket && userSocket.authenticated) {
-                                console.log('emitting message to', user, socketId)
-                                userSocket.emit('receive-message', JSON.stringify(message))
-                            }
-                        }
-                    })
+                    io.to(chatId).emit('receive-message', JSON.stringify(message))
                 })
 
                 socket.on('disconnect', () => {
                     console.log('Disconnected')
-                    connections.delete(socket.id)
                 })
 
             })
