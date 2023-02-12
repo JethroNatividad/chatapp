@@ -5,6 +5,7 @@ import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
 import { CreateChatProvider } from './CreateChatContext'
 import io from 'Socket.IO-client'
+import { useAuth } from './AuthContext'
 
 const ChatContext = createContext({
     isOpen: false,
@@ -20,10 +21,8 @@ let socket
 
 export function ChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
     const [activeChat, setActiveChat] = useState(null)
     const [chatList, setChatList] = useState([])
-
 
     useEffect(() => {
         const fn = async () => {
@@ -32,8 +31,8 @@ export function ChatProvider({ children }) {
             setChatList(data.chats)
         }
         const socketInitializer = async () => {
-            await fetch('/api/socket')
             socket = io()
+            socket.connect()
 
             socket.on('connect', () => {
                 console.log('connected')
@@ -41,6 +40,10 @@ export function ChatProvider({ children }) {
 
             socket.on('new-message', () => {
                 console.log('New message')
+            })
+
+            socket.on('receive-message', (data) => {
+                console.log('Received message', data)
             })
         }
         fn()
@@ -57,10 +60,10 @@ export function ChatProvider({ children }) {
     const sendMessage = async (text) => {
         console.log(text)
         if (!activeChat) return console.log("No active chat")
-        socket.emit('send-message', JSON.stringify({ chatId: activeChat.id, text }))
-        // const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
-        // if (error) return console.log(error)
-        // console.log(data)
+        const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
+        if (error) return console.log(error)
+        console.log(data)
+        socket.emit('send-message', JSON.stringify({ userIds: activeChat.userIds, message: data }))
     }
 
     return (
