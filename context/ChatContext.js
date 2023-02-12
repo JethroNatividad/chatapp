@@ -46,16 +46,19 @@ export function ChatProvider({ children }) {
             })
 
             socket.on('receive-message', (data) => {
-                console.log('Received message', data)
+                console.log('Received message:', data)
+                // if (data.chat === activeChat?.id) {
+                //     setActiveChat({ ...activeChat, messages: [...activeChat.messages, data.message] })
+                // }
             })
         }
         fn()
-    }, [])
+    }, [activeChat])
 
     const setActiveChatId = async (chatId) => {
         const [error, data] = await fetcher(`/api/chats/${chatId}`)
         if (error) return console.log(error)
-        console.log(data)
+        console.log('activechat', data)
         setActiveChat(data.chat)
     }
 
@@ -64,8 +67,7 @@ export function ChatProvider({ children }) {
         if (!activeChat) return console.log("No active chat")
         const [error, data] = await poster(`/api/chats/${activeChat.id}/messages`, { text, attachments: [] })
         if (error) return console.log(error)
-        console.log(data)
-        socket.emit('send-message', JSON.stringify({ chatId: activeChat.id, message: data }))
+        socket.emit('send-message', JSON.stringify({ chatId: activeChat.id, message: data.data }))
     }
 
     return (
