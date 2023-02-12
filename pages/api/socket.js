@@ -1,40 +1,70 @@
 import { Server } from 'Socket.IO'
+import dbConnect from '../../lib/dbConnect'
+import Chat from '../../models/Chat'
+import Message from '../../models/Message'
 
-const SocketHandler = (req, res) => {
+const SocketHandler = async (req, res) => {
     if (res.socket.server.io) {
         console.log('Socket is already running')
     } else {
-        console.log('Socket is initializing')
-        const io = new Server(res.socket.server)
-        res.socket.server.io = io
+        try {
+            console.log('Socket is initializing')
+            await dbConnect()
+            const io = new Server(res.socket.server)
+            res.socket.server.io = io
 
-        const connections = new Map()
+            const connections = new Map()
+            const userIdToSocketId = new Map()
 
-        io.on('connection', socket => {
-            socket.on('input-change', msg => {
-                socket.broadcast.emit('update-input', msg)
+            io.on('connection', socket => {
+                console.log(`User connected: ${socket.id}`)
+                connections.set(socket.id, socket)
+
+                socket.on('authenticate', userId => {
+                    userIdToSocketId.set(userId, socket.id)
+                })
+
+                socket.on('send-message', async data => {
+                    const { chatId, text } = JSON.parse(data)
+                    const chat = await Chat.findById(chatId)
+                    if (!chat) return console.log('Chat not found')
+
+                    // get all users in chat that are in the userIdToSocketId map
+                    const users = chat.users.filter(user => userIdToSocketId.has(user.toString()))
+                    // save the message to the database
+                    const sender = userIdToSocketId.get(socket.id)
+                    const message = await Message.create({
+                        chat: chatId,
+                        sender,
+                        text,
+                        seen: [sender]
+                    })
+
+                    await chat.populate('messages', ['_id', 'sender', 'text', 'seen', 'createdAt'])
+                    await chat.populate('messages.sender', ['_id', 'username', 'profile_picture', 'tag'])
+                    await chat.populate('messages.seen', ['_id', 'username', 'profile_picture', 'tag'])
+                    // emit the message to all users in the chat
+                    users.forEach(user => {
+                        const socketId = userIdToSocketId.get(user.toString())
+                        if (socketId) {
+                            const socket = connections.get(socketId)
+                            if (socket) {
+                                socket.emit('receive-message', message)
+                            }
+                        }
+                    })
+                })
+
+                socket.on('disconnect', () => {
+                    console.log('Disconnected')
+                    connections.delete(socket.id)
+                })
+
             })
 
-            socket.on('message', message => {
-                const { type, payload } = JSON.parse(message)
-
-                if (type === 'AUTHENTICATE') {
-                    const { chatId } = payload
-                    connections.set(chatId, socket)
-                }
-
-                if (type === 'SEND_MESSAGE') {
-                    const { chatId } = payload
-                    const chatSocket = connections.get(chatId)
-
-                    if (chatSocket) {
-                        chatSocket.emit('new-message', 1)
-                    }
-                }
-            })
-
-        })
-
+        } catch (error) {
+            console.error(error)
+        }
     }
     res.end()
 }
