@@ -27,8 +27,9 @@ export function AuthProvider({ children }) {
                     setUserLoading(false)
                     throw new Error(error.message)
                 }
+                await fetch('/api/socket')
                 socket = io()
-                socket.connect()
+
                 socket.on('connect', () => {
                     console.log('connected')
                 })

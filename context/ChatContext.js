@@ -31,8 +31,8 @@ export function ChatProvider({ children }) {
             setChatList(data.chats)
         }
         const socketInitializer = async () => {
+            await fetch('/api/socket')
             socket = io()
-            socket.connect()
 
             socket.on('connect', () => {
                 console.log('connected')
