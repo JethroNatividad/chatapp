@@ -6,7 +6,7 @@ import Message from './Message'
 
 
 const ChatArea = () => {
-    const { activeChat } = useChat()
+    const { activeChat, testMessages } = useChat()
     if (!activeChat) {
         return (
             <Flex h='full' w='full' justifyContent='center' alignItems='center'>

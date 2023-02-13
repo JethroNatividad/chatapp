@@ -1,11 +1,8 @@
 import { useDisclosure } from '@chakra-ui/react'
-import axios from 'axios'
-import { useRouter } from 'next/router'
 import { createContext, useState, useEffect, useContext } from 'react'
 import fetcher, { poster } from '../lib/fetcher'
 import { CreateChatProvider } from './CreateChatContext'
 import io from 'Socket.IO-client'
-import { useAuth } from './AuthContext'
 
 const ChatContext = createContext({
     isOpen: false,
@@ -23,6 +20,7 @@ export function ChatProvider({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [activeChat, setActiveChat] = useState(null)
     const [chatList, setChatList] = useState([])
+    const [testMessages, setTestMessages] = useState([])
 
     useEffect(() => {
         const fn = async () => {
@@ -46,10 +44,13 @@ export function ChatProvider({ children }) {
             })
 
             socket.on('receive-message', (data) => {
+                data = JSON.parse(data)
                 console.log('Received message:', data)
-                // if (data.chat === activeChat?.id) {
-                //     setActiveChat({ ...activeChat, messages: [...activeChat.messages, data.message] })
-                // }
+                // setTestMessages(prevState => [...prevState, data])
+                if (activeChat && data.chat === activeChat.id) {
+                    console.log('Active chat:', activeChat)
+                    setActiveChat(prevState => ({ ...prevState, messages: [...prevState.messages, data] }))
+                }
             })
         }
         fn()
@@ -71,7 +72,7 @@ export function ChatProvider({ children }) {
     }
 
     return (
-        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId, chatList, sendMessage } }>
+        <ChatContext.Provider value={ { isOpen, onOpen, onClose, activeChat, setActiveChatId, chatList, sendMessage, testMessages } }>
             <CreateChatProvider>
                 { children }
             </CreateChatProvider>
