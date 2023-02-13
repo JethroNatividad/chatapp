@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.0.11",
     "next": "latest",
+    "pusher": "^5.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swr": "^1.0.1"
